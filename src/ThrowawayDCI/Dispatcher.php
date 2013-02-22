@@ -47,7 +47,7 @@ class Dispatcher
     }
 
     /**
-     * Load routes from external file default is App/config/routes.json
+     * Load routes from external file default is APP_NAME/Resources/config/routes.json
      * @return array
      */
     private function _loadRoutes()
