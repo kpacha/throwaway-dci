@@ -1,0 +1,11 @@
+{
+    "development"   :   {
+        "host"      :   "localhost",
+        "port"      :   3601,
+        "user"      :   "test",
+        "password"  :   "test",
+        "schema"    :   "throwaway-dci",
+        "database"  :   "mysql",
+        "encoding"  :   "utf-8"
+    }
+}
