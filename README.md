@@ -8,5 +8,6 @@ Get the required vendors with composer:
     $ php composer.phar update
 
 ###TO-DO
-- enable ORM (maybe with [phpactiverecord](http://www.phpactiverecord.org/)? )
+- improve the ORM testing
+- decouple the Framework from Doctrine ORM
 - test complex use cases

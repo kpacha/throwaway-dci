@@ -89,11 +89,13 @@ class Dispatcher
 
     /**
      * Run the application
+     * 
+     * @param type $entityManager
      */
-    public function run()
+    public function run($entityManager = null)
     {
         try {
-            $viewVars = $this->handle($this->_getRequest());
+            $viewVars = $this->handle($entityManager, $this->_getRequest());
             $this->_fetchView($viewVars);
         } catch (Exception $e) {
             header("HTTP/1.0 404 Not Found");
@@ -102,14 +104,17 @@ class Dispatcher
 
     /**
      * Route the request and return the context with the response
-     * @return Core\Context
+     * 
+     * @param type $entityManager
+     * @param array $request
+     * @return Context
      */
-    private function handle($request = null)
+    private function handle($entityManager, $request = null)
     {
         $route = $this->getRoute($this->_getPath());
         $contextClass = $route['useCase'];
         $step = $route['step'];
-        $context = new $contextClass($step);
+        $context = new $contextClass($step, $entityManager);
 
         return $context->$step($request);
     }

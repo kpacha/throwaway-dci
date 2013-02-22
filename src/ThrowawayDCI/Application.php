@@ -46,6 +46,9 @@ class Application
         // add the application prefix
         $this->_autoloader->add(APP_NAME, SRC_PATH);
         $this->_autoloader->register();
+        
+        // composer autoloader
+        require_once LIBRARY_PATH . '/autoload.php';
     }
 
     /**
@@ -68,7 +71,11 @@ class Application
      */
     public function run()
     {
-        $this->getDispatcher()->run();
+        $this->getDispatcher()->run($this->_getEntityManager());
+    }
+    
+    private function _getEntityManager(){
+        return DoctrineEntityManagerFactory::create();
     }
 
 }

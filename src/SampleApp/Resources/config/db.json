@@ -4,8 +4,8 @@
         "port"      :   3601,
         "user"      :   "test",
         "password"  :   "test",
-        "schema"    :   "throwaway-dci",
-        "database"  :   "mysql",
-        "encoding"  :   "utf-8"
+        "dbname"    :   "throwaway-dci",
+        "driver"    :   "pdo_mysql",
+        "charset"   :   "utf8"
     }
 }
