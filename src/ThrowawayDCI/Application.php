@@ -35,6 +35,9 @@ class Application
      */
     public function __construct()
     {
+        define('PHP_ACTIVERECORD_AUTOLOAD_DISABLE', true);
+        require_once LIBRARY_PATH . '/php-activerecord/php-activerecord/ActiveRecord.php';
+        
         require_once LIBRARY_PATH . '/composer/ClassLoader.php';
         $this->_autoloader = new \Composer\Autoload\ClassLoader();
 

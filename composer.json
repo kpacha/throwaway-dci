@@ -1,6 +1,7 @@
 {
     "name": "kpacha/throwaway-dci",
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "php-activerecord/php-activerecord": "dev-master"
     }
 }
