@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * @package ThrowawayDCI
+ */
+
+namespace ThrowawayDCI;
+
+/**
+ * Application logic from the throwaway framework
+ *
+ * @author Kpacha <kpacha666@gmail.com>
+ * @see https://github.com/kpacha/throwaway
+ */
+class Application
+{
+
+    /**
+     * Autoloader to use
+     *
+     * @var ThrowawayDCI\Autoloader
+     */
+    protected $_autoloader;
+
+    /**
+     * Dispatcher
+     *
+     * @var ThrowawayDCI\Dispatcher
+     */
+    protected $_dispatcher;
+
+    /**
+     * The default constructor loads the composer autoloader and updates it with the
+     * required namespaces
+     */
+    public function __construct()
+    {
+        require_once LIBRARY_PATH . '/composer/ClassLoader.php';
+        $this->_autoloader = new \Composer\Autoload\ClassLoader();
+
+        // add the framework prefix
+        $this->_autoloader->add("ThrowawayDCI", SRC_PATH);
+        // add the application prefix
+        $this->_autoloader->add(APP_NAME, SRC_PATH);
+        $this->_autoloader->register();
+    }
+
+    /**
+     * Get dispatcher object
+     *
+     * @return Core_Dispatcher
+     */
+    public function getDispatcher()
+    {
+        if (null === $this->_dispatcher) {
+            $this->_dispatcher = new Dispatcher();
+        }
+        return $this->_dispatcher;
+    }
+
+    /**
+     * Run the application
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $this->getDispatcher()->run();
+    }
+
+}
