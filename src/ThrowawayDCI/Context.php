@@ -32,16 +32,17 @@ class Context
 
     /**
      * Wrapper for the step execution. Adds some info about the use case and the executed step
+     * 
      * @param String $name
      * @param array $arguments
      * @return array
-     * @throws Core\Exception
+     * @throws Exception
      */
     public function __call($name, $arguments)
     {
         $stepMethod = $this->_getStepMethodName($name);
         if (!method_exists($this, $stepMethod)) {
-            throw new Core_Exception("Unknown step [$stepMethod] for the useCase " . self::$useCaseName);
+            throw new Exception("Unknown step [$stepMethod] for the useCase " . self::$useCaseName);
         }
         $viewVars = $this->$stepMethod($arguments, self::$entityManager);
         $viewVars['useCase'] = self::$useCaseName;
