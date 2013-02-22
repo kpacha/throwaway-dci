@@ -55,4 +55,29 @@ class Account
         return $this->amount;
     }
 
+    public function setId($id = 0)
+    {
+        return $this->id = $id;
+    }
+
+    public function setName($name = '')
+    {
+        return $this->name = $name;
+    }
+
+    public function setNumber($number = '')
+    {
+        return $this->number = $number;
+    }
+
+    public function setUserId($userId = 0)
+    {
+        return $this->userId = $userId;
+    }
+
+    public function setAmount($amount = 0)
+    {
+        return $this->amount = $amount;
+    }
+
 }
