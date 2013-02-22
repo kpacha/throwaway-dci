@@ -1,0 +1,10 @@
+{
+    "development"   :   {
+        "host"      :   "localhost",
+        "port"      :   3601,
+        "user"      :   "test",
+        "password"  :   "test",
+        "dbname"    :   "throwaway-dci",
+        "driver"    :   "pdo_mysql"
+    }
+}
