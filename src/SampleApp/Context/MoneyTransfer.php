@@ -7,6 +7,8 @@
 namespace SampleApp\Context;
 
 use ThrowawayDCI\Context;
+use SampleApp\Role\DestinationAccount;
+use SampleApp\Role\SourceAccount;
 
 class MoneyTransfer extends Context
 {
@@ -31,9 +33,48 @@ class MoneyTransfer extends Context
     }
 
     // this function looks messy, and actually does much more than only verify...
-    function verifyStep()
+    function verifyStep($request = null)
     {
-        throw new \ThrowawayDCI\Exception("undefined step");
+        $request = $request[0];
+        if ($request['SourceAccount']['number'] == $request['DestinationAccount']['number']) {
+            $v['message'] = 'Source and Destination are same';
+            return $v;
+        }
+
+        $source = new SourceAccount($this->_getAccountRepo()->findOneBy(array('number' => $request['SourceAccount']['number'])));
+        if (!$source) {
+            $v['message'] = 'Invalid Source Account';
+            return $v;
+        }
+
+        $destination = new DestinationAccount($this->_getAccountRepo()->findOneBy(array('number' => $request['DestinationAccount']['number'])));
+        if (!$destination) {
+            $v['message'] = 'Invalid Destination Account';
+            return $v;
+        }
+
+        $amount = $request['MoneyTransfer']['amount'];
+        if ($amount <= 0) {
+            $v['message'] = 'Invalid Amount';
+            return $v;
+        }
+
+        if ($source->drawMoney($amount)) {
+            $destination->deposit($amount);
+            $source->persist(self::$entityManager);
+            $destination->persist(self::$entityManager);
+//            $this->log($source, $destination, $amount);
+            self::$entityManager->flush();
+            $v['message'] = 'Success';
+        } else {
+            $v['message'] = 'Operation failed';
+        }
+        return $v;
+    }
+
+    private function _getAccountRepo()
+    {
+        return self::$entityManager->getRepository('SampleApp\Data\Account');
     }
 
 }
