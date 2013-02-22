@@ -2,12 +2,19 @@
 -
 [Throw Away Framework](https://github.com/kpacha/throwaway) version implementing a pseudo-dci pattern based on the [Dion Moult's post] (http://thinkmoult.com/2012/08/24/a-dci-architecture-implementation-in-php/)
 
+There are two use cases:
+
+- Romeo And Juliet (from the [Dion Moult's post] (http://thinkmoult.com/2012/08/24/a-dci-architecture-implementation-in-php/))
+- The well-known money transfer (with some from https://github.com/DCI/dci-examples/blob/master/moneytransfer/php/risto-valimaki/) 
+
 Get the required vendors with composer:
 
     $ curl -sS https://getcomposer.org/installer | php
     $ php composer.phar update
 
 ###TO-DO
-- improve the ORM testing
-- decouple the Framework from Doctrine ORM
-- test complex use cases
+
+- remove the wrapper for the persistent entities
+- decouple the Core from Doctrine ORM
+- improve namespaces of the sample app
+- log the transactions of the money transfer use case
