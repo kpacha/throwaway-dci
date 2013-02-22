@@ -13,17 +13,21 @@ class Context
 {
 
     protected static $useCaseName;
+    protected static $entityManager;
     
     /**
      * Check if the step exists in the use case
+     * 
      * @param String $step
-     * @throws Core\Exception
+     * @param type $entityManager
+     * @throws Exception
      */
-    public function __construct($step)
+    public function __construct($step, $entityManager = null)
     {
         if (!method_exists($this, $this->_getStepMethodName($step))) {
             throw new Exception("Unknown step [$step] for the useCase " . self::$useCaseName);
         }
+        self::$entityManager = $entityManager;
     }
 
     /**
@@ -39,7 +43,7 @@ class Context
         if (!method_exists($this, $stepMethod)) {
             throw new Core_Exception("Unknown step [$stepMethod] for the useCase " . self::$useCaseName);
         }
-        $viewVars = $this->$stepMethod($arguments);
+        $viewVars = $this->$stepMethod($arguments, self::$entityManager);
         $viewVars['useCase'] = self::$useCaseName;
         $viewVars['step'] = $name;
         return $viewVars;

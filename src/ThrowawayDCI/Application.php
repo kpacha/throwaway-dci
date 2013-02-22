@@ -68,7 +68,11 @@ class Application
      */
     public function run()
     {
-        $this->getDispatcher()->run();
+        $this->getDispatcher()->run($this->_getEntityManager());
+    }
+    
+    private function _getEntityManager(){
+        return DoctrineEntityManagerFactory::create();
     }
 
 }
