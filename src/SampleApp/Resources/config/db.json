@@ -5,6 +5,7 @@
         "user"      :   "test",
         "password"  :   "test",
         "dbname"    :   "throwaway-dci",
-        "driver"    :   "pdo_mysql"
+        "driver"    :   "pdo_mysql",
+        "charset"   :   "utf8"
     }
 }
