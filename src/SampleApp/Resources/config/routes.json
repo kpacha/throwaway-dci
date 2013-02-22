@@ -1,0 +1,10 @@
+{
+    "\/"	:	{
+        "useCase"   :	"SampleApp\\Context\\RomeoAndJuliet",
+        "step"      :	"start"
+    },
+    "\/RomeoAndJuliette"    :	{
+        "useCase"   :	"SampleApp\\Context\\RomeoAndJuliet",
+        "step"      :	"start"
+    }
+}
