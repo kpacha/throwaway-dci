@@ -38,7 +38,11 @@ class MoneyTransfer extends Context
     function startStep()
     {
         //find all possible source accounts for current user
-        $v['sourceAccounts'] = self::$entityManager->getRepository('SampleApp\Data\Account')->findBy(array('userId' => 1));
+        $userId = 1;
+
+        foreach (self::$_dataTypes as $dataType => $className) {
+            $v['sourceAccounts'][$dataType] = $this->_getAccountRepo($className)->findBy(array('userId' => $userId));
+        }
         return $v; // v is just short for variables, a temporary table where all the view vars are stored
     }
 

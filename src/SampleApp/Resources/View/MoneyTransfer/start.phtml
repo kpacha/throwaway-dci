@@ -1,14 +1,32 @@
 <form action="../MoneyTransfer/verify" method="post">
 
-<p>Source Account:</p>
-<select name="SourceAccount[number]">
-    <? foreach($sourceAccounts as $s): ?>
-    <option value="<?=$s->getNumber()?>"><?=$s->getNumber()?> <?=$s->getName()?> (<?=$s->getAmount()?>€)</option>
+<p>Source of the transaction:</p>
+<select id="SourceAccount" name="SourceAccount[number]">
+    <option selected>select opne ...</option>
+    <? foreach($sourceAccounts as $sourceType => $accounts): ?>
+    <optgroup label="<?=$sourceType?>">
+        <? foreach($accounts as $s): ?>
+        <option value="<?=$s->getNumber()?>"><?=$s->getNumber()?> <?=$s->getName()?> (<?=$s->getAmount()?>€)</option>
+        <? endforeach; ?>
+    </optgroup>
     <? endforeach; ?>
 </select>
-<p>Destination Account:</p>
+<p>Destination Type:</p>
+<? foreach($sourceAccounts as $sourceType => $accounts): ?>
+<input type="radio" name="DestinationAccount[type]" value="<?=$sourceType?>" /> <?=$sourceType?>
+<? endforeach; ?>
+<p>Destination Code:</p>
 <input name="DestinationAccount[number]" type="text" />
 <p>Amount:</p>
 <input name="MoneyTransfer[amount]" type="text" />
+<input id="SourceAccountType" name="SourceAccount[type]" type="hidden" />
 <input type="submit" value="Submit" />
 </form>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#SourceAccount').on('change', function () {
+    var elt = $('#'+this.id)[0];
+    var label = $(elt.options[elt.selectedIndex]).closest('optgroup').prop('label');
+    $('input#SourceAccountType').val(label);
+});
+</script>
