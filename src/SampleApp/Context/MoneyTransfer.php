@@ -21,7 +21,11 @@ class MoneyTransfer extends Context
     const DATA_ACCOUNT = 'SampleApp\Data\Account';
     const DATA_MOBILEACCOUNT = 'SampleApp\Data\MobileAccount';
     const DATA_SAVESACCOUNT = 'SampleApp\Data\SavesAccount';
-    const DATA_DEFAULT = self::DATA_ACCOUNT;
+    
+    const KEY_ACCOUNT = 'account';
+    const KEY_MOBILEACCOUNT = 'mobile';
+    const KEY_SAVESACCOUNT = 'saves';
+    const KEY_DEFAULT = self::KEY_ACCOUNT;
 
     private static $_dataTypes = array(
         'account' => self::DATA_ACCOUNT,
@@ -47,7 +51,7 @@ class MoneyTransfer extends Context
     }
 
     // this function looks messy, and actually does much more than only verify...
-    function verifyStep($request = null)
+    function verifyStep($request = array())
     {
         $request = $request[0];
         if ($request['SourceAccount']['number'] == $request['DestinationAccount']['number']) {
