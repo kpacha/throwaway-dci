@@ -12,12 +12,22 @@ use SampleApp\Role\SourceAccount;
 
 class MoneyTransfer extends Context
 {
-
     // MoneyTransfer Use Case:
     // 1. user starts money transfer, and is displayed with money transfer form
     // 2. user then selects source account, destination account and amounnt of money to be sent
     // 3. user commits moneytransfer, system verifies
     // 4. system write logs about transfer
+
+    const DATA_ACCOUNT = 'SampleApp\Data\Account';
+    const DATA_MOBILEACCOUNT = 'SampleApp\Data\MobileAccount';
+    const DATA_SAVESACCOUNT = 'SampleApp\Data\SavesAccount';
+    const DATA_DEFAULT = self::DATA_ACCOUNT;
+
+    private static $_dataTypes = array(
+        'account' => self::DATA_ACCOUNT,
+        'mobile' => self::DATA_MOBILEACCOUNT,
+        'saves' => self::DATA_SAVESACCOUNT
+    );
 
     public function __construct($step, $entityManager = null)
     {
@@ -72,9 +82,18 @@ class MoneyTransfer extends Context
         return $v;
     }
 
-    private function _getAccountRepo()
+    private function _getDataTypeClass($requestedType = self::DATA_DEFAULT)
     {
-        return self::$entityManager->getRepository('SampleApp\Data\Account');
+        $requestdClassName = self::$_dataTypes[self::DATA_DEFAULT];
+        if (key_exists($requestedType, self::$_dataTypes)) {
+            $requestdClassName = self::$_dataTypes[$requestedType];
+        }
+        return $requestdClassName;
+    }
+
+    private function _getAccountRepo($className = self::DATA_ACCOUNT)
+    {
+        return self::$entityManager->getRepository($className);
     }
 
 }
