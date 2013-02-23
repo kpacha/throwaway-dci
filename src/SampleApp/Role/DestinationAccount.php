@@ -10,5 +10,4 @@ class DestinationAccount extends Account
 {
 
     use DestinationAccountInteractions;
-    use PersistibleInteractions;
 }

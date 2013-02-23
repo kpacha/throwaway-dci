@@ -12,5 +12,4 @@ class SourceAccount extends Account
 {
 
     use SourceAccountInteractions;
-    use PersistibleInteractions;
 }
