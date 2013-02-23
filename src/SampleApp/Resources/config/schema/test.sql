@@ -48,6 +48,59 @@ INSERT INTO accounts (id, `name`, number, user_id, amount) VALUES
 -- --------------------------------------------------------
 
 --
+-- Rakenne taululle 'saves_accounts'
+--
+
+CREATE TABLE saves_accounts (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  number varchar(50) DEFAULT NULL,
+  user_id int(11) NOT NULL,
+  amount decimal(15,2) NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (id),
+  UNIQUE KEY number (number)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Vedos taulusta 'saves_accounts'
+--
+
+INSERT INTO saves_accounts (id, `name`, number, user_id, amount) VALUES
+(1, 'tupu, savings account', '555555-555', 1, 562.80),
+(2, 'tupu, another account', '666666-666', 1, 93.59),
+(3, 'supu', '777777-777', 2, 23235327.94),
+(4, 'mr. ñandú', '999999-999', 3, 3423450.30);
+
+-- --------------------------------------------------------
+
+--
+-- Rakenne taululle 'mobile_accounts'
+--
+
+CREATE TABLE mobile_accounts (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  number varchar(50) DEFAULT NULL,
+  user_id int(11) NOT NULL,
+  amount decimal(15,2) NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (id),
+  UNIQUE KEY number (number)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Vedos taulusta 'mobile_accounts'
+--
+
+INSERT INTO mobile_accounts (id, `name`, number, user_id, amount) VALUES
+(1, 'Välimäki Risto', '+34666666666', 1, 11.01),
+(2, 'tupu personal phone', '+34690050505', 2, 27.94),
+(3, 'supu personal phone', '+34900000000', 3, 30.30),
+(4, 'tupu office phone', '+3469999999998', 2, 270.04),
+(5, 'supu office phone', '+3469999999999', 3, 350.90);
+
+-- --------------------------------------------------------
+
+--
 -- Rakenne taululle 'transfers'
 --
 
