@@ -55,13 +55,19 @@ class MoneyTransfer extends Context
             return $v;
         }
 
-        $source = new SourceAccount($this->_getAccountRepo()->findOneBy(array('number' => $request['SourceAccount']['number'])));
+        $sourceDataType = $this->_getDataTypeClass($request['SourceAccount']['type']);
+        $sourceData = $this->_getAccountRepo($sourceDataType)
+                ->findOneBy(array('number' => $request['SourceAccount']['number']));
+        $source = new SourceAccount($sourceData);
         if (!$source) {
             $v['message'] = 'Invalid Source Account';
             return $v;
         }
 
-        $destination = new DestinationAccount($this->_getAccountRepo()->findOneBy(array('number' => $request['DestinationAccount']['number'])));
+        $destinationDataType = $this->_getDataTypeClass($request['DestinationAccount']['type']);
+        $destinationData = $this->_getAccountRepo($destinationDataType)
+                ->findOneBy(array('number' => $request['DestinationAccount']['number']));
+        $destination = new DestinationAccount($destinationData);
         if (!$destination) {
             $v['message'] = 'Invalid Destination Account';
             return $v;
