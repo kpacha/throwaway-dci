@@ -61,8 +61,8 @@ class MoneyTransfer extends Context
 
         if ($source->drawMoney($amount)) {
             $destination->deposit($amount);
-            $source->persist(self::$entityManager);
-            $destination->persist(self::$entityManager);
+            self::$entityManager->persist($source->getData());
+            self::$entityManager->persist($destination->getData());
 //            $this->log($source, $destination, $amount);
             self::$entityManager->flush();
             $v['message'] = 'Success';
