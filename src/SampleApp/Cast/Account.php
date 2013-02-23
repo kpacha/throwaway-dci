@@ -20,11 +20,11 @@ abstract class Account implements AccountRequirements
     
     /**
      * the data wrapper
-     * @var AccountData
+     * @var AccountRequirements
      */
     private $_data = null;
 
-    public function __construct(AccountData $account)
+    public function __construct(AccountRequirements $account)
     {
         $this->_data = $account;
     }

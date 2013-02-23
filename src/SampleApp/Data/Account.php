@@ -8,11 +8,13 @@
 
 namespace SampleApp\Data;
 
-/** 
+use SampleApp\Cast\AccountRequirements;
+
+/**
  * @Entity
  * @Table(name="accounts")
  */
-class Account
+class Account implements AccountRequirements
 {
 
     /** @Id @Column(type="integer") @GeneratedValue */
