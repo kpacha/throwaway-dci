@@ -85,20 +85,28 @@ class MoneyTransfer extends Context
 
         if ($source->drawMoney($amount)) {
             $destination->deposit($amount);
-            self::$entityManager->persist($source->getData());
-            self::$entityManager->persist($destination->getData());
-//            $this->log($source, $destination, $amount);
-            self::$entityManager->flush();
-            $v['message'] = 'Success';
+            self::$entityManager->getConnection()->beginTransaction();
+            try{
+                self::$entityManager->persist($source->getData());
+                self::$entityManager->persist($destination->getData());
+//                $this->log($source, $destination, $amount);
+                self::$entityManager->flush();
+                self::$entityManager->getConnection()->commit();
+                $v['message'] = 'Success';
+            } catch (\Exception $exception){
+                self::$entityManager->getConnection()->rollback();
+                $v['message'] = $exception;
+            }
+            self::$entityManager->close();
         } else {
             $v['message'] = 'Operation failed';
         }
         return $v;
     }
 
-    private function _getDataTypeClass($requestedType = self::DATA_DEFAULT)
+    private function _getDataTypeClass($requestedType = self::KEY_DEFAULT)
     {
-        $requestdClassName = self::$_dataTypes[self::DATA_DEFAULT];
+        $requestdClassName = self::$_dataTypes[self::KEY_DEFAULT];
         if (key_exists($requestedType, self::$_dataTypes)) {
             $requestdClassName = self::$_dataTypes[$requestedType];
         }
