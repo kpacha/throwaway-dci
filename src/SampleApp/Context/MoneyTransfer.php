@@ -28,9 +28,9 @@ class MoneyTransfer extends Context
     const KEY_DEFAULT = self::KEY_ACCOUNT;
 
     private static $_dataTypes = array(
-        'account' => self::DATA_ACCOUNT,
-        'mobile' => self::DATA_MOBILEACCOUNT,
-        'saves' => self::DATA_SAVESACCOUNT
+        self::KEY_ACCOUNT => self::DATA_ACCOUNT,
+        self::KEY_MOBILEACCOUNT => self::DATA_MOBILEACCOUNT,
+        self::KEY_SAVESACCOUNT => self::DATA_SAVESACCOUNT
     );
 
     public function __construct($step, $entityManager = null)
@@ -113,8 +113,11 @@ class MoneyTransfer extends Context
         return $requestdClassName;
     }
 
-    private function _getAccountRepo($className = self::DATA_ACCOUNT)
+    private function _getAccountRepo($className = null)
     {
+        if (!$className) {
+            $className = self::$_dataTypes[self::KEY_DEFAULT];
+        }
         return self::$entityManager->getRepository($className);
     }
 
