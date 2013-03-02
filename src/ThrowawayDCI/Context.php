@@ -1,7 +1,9 @@
 <?php
+
 /**
  * @package ThrowawayDCI
  */
+
 namespace ThrowawayDCI;
 
 /**
@@ -14,7 +16,7 @@ class Context
 
     protected static $useCaseName;
     protected static $entityManager;
-    
+
     /**
      * Check if the step exists in the use case
      * 
@@ -44,7 +46,7 @@ class Context
         if (!method_exists($this, $stepMethod)) {
             throw new Exception("Unknown step [$stepMethod] for the useCase " . self::$useCaseName);
         }
-        $viewVars = $this->$stepMethod($arguments, self::$entityManager);
+        $viewVars = $this->$stepMethod($arguments);
         $viewVars['useCase'] = self::$useCaseName;
         $viewVars['step'] = $name;
         return $viewVars;
@@ -55,7 +57,7 @@ class Context
      * @param String $stepName
      * @return String
      */
-    private function _getStepMethodName($stepName)
+    protected function _getStepMethodName($stepName)
     {
         return $stepName . 'Step';
     }
