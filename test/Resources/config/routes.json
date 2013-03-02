@@ -1,0 +1,18 @@
+{
+    "\/"	:	{
+        "useCase"   :	"ThrowawayDCITest\\Context\\SomeUseCase",
+        "step"      :	"start"
+    },
+    "\/SomeUseCase"    :	{
+        "useCase"   :	"ThrowawayDCITest\\Context\\SomeUseCase",
+        "step"      :	"start"
+    },
+    "\/SomeUseCase\/someStep"    :	{
+        "useCase"   :	"ThrowawayDCITest\\Context\\AliasedUseCase",
+        "step"      :	"someStep"
+    },
+    "\/OtherUseCase/notEscaped"    :	{
+        "useCase"   :	"ThrowawayDCITest\\Context\\OtherUseCase",
+        "step"      :	"start"
+    }
+}
