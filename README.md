@@ -18,3 +18,6 @@ Get the required vendors with composer:
 - decouple the Core from Doctrine ORM
 - improve namespaces of the sample app
 - log the transactions of the money transfer use case
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kpacha/throwaway-dci/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
